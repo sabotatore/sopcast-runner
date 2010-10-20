@@ -1,4 +1,4 @@
-class Sopcast
+class SopcastRunner::Sopcast
 
   def initialize(channel, port)
     @channel, @port = channel, port
@@ -39,3 +39,4 @@ class Sopcast
   end
 
 end
+

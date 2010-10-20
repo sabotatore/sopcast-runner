@@ -1,4 +1,4 @@
-class Player
+class SopcastRunner::Player
 
   def initialize(name, port)
     @name, @port = name, port
@@ -11,3 +11,4 @@ class Player
   end
 
 end
+

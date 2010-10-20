@@ -1,8 +1,9 @@
 require "yaml"
-require "sopcast"
-require "player"
 
 class SopcastRunner
+
+  require "sopcast_runner/sopcast"
+  require "sopcast_runner/player"
 
   def initialize(channel)
     check_sp_auth
@@ -22,7 +23,7 @@ class SopcastRunner
   private
 
   def load_config
-    YAML.load_file(File.expand_path('../../etc/sopcast-runner.yml', __FILE__))
+    YAML.load_file(File.expand_path('../../etc/sopcast_runner/sopcast_runner.yml', __FILE__))
   end
 
   def validate_channel(id)
@@ -47,3 +48,4 @@ class SopcastRunner
   end
 
 end
+
