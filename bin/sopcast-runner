@@ -3,7 +3,7 @@
 $:.unshift(File.expand_path('../../lib', __FILE__))
 require 'sopcast_runner'
 
-sopcast_runner = SopcastRunner.new(ARGV)
+sopcast_runner = SopcastRunner.new(ARGV.first)
 sopcast_runner.run
 
 puts "Bye!"

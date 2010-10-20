@@ -4,15 +4,13 @@ require "player"
 
 class SopcastRunner
 
-  PORT = '8908'
-
-  def initialize(*args)
+  def initialize(channel)
     check_sp_auth
-    validate_channel(args.first)
+    validate_channel(channel)
     config = load_config
     check_player(config['player'])
     @player = Player.new(config['player'], config['port'])
-    @sopcast = Sopcast.new(args.first, config['port'])
+    @sopcast = Sopcast.new(channel, config['port'])
   end
 
   def run
