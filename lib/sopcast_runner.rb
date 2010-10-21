@@ -23,9 +23,9 @@ class SopcastRunner
   private
 
   def load_config
-    YAML.load_file(File.expand_path('../../etc/sopcast_runner/sopcast_runner.yml', __FILE__))
+    YAML.load_file(File.expand_path('../../conf/sopcast_runner/sopcast_runner.conf', __FILE__))
   rescue Errno::ENOENT
-    YAML.load_file('/etc/sopcast_runner/sopcast_runner.yml')
+    YAML.load_file('/etc/sopcast_runner/sopcast_runner.conf')
   end
 
   def validate_channel(id)
