@@ -21,6 +21,6 @@ USAGE
 CONFIG
 ======
 
-    You can configure player
+You can change default player
 
     $ sudo gedit /etc/sopcast_runner/sopcast_runner.yml
