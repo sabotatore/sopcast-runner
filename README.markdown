@@ -16,6 +16,10 @@ install sopcast-runner package
 USAGE
 =====
 
+    $ sopcast-runner [ChannelURL]
+
+or
+
     $ sopcast-runner [ChannelId]
 
 CONFIG

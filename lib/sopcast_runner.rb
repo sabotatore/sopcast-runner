@@ -7,11 +7,11 @@ class SopcastRunner
 
   def initialize(channel)
     check_sp_auth
-    validate_channel(channel)
+    channel_id = get_channel_id(channel)
     config = load_config
     check_player(config['player'])
     @player = Player.new(config['player'], config['port'])
-    @sopcast = Sopcast.new(channel, config['port'])
+    @sopcast = Sopcast.new(channel_id, config['port'])
   end
 
   def run
@@ -28,11 +28,13 @@ class SopcastRunner
     YAML.load_file('/etc/sopcast_runner/sopcast_runner.conf')
   end
 
-  def validate_channel(id)
-    unless id =~ /^\d{4,6}$/
+  def get_channel_id(channel)
+    unless channel =~ /^((sop:\/\/)?broker.sopcast.com:3912\/)?(\d{4,6})\/?$/
       puts "Please type correct Channel ID. Run like 'sopcast-runner 12345'"
       exit
     end
+    # return channel id
+    $3
   end
 
   def check_sp_auth
