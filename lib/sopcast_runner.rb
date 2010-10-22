@@ -1,6 +1,8 @@
 require "yaml"
+require "sopcast_runner/notification"
 
 class SopcastRunner
+  include Notification
 
   require "sopcast_runner/sopcast"
   require "sopcast_runner/player"
@@ -36,7 +38,7 @@ class SopcastRunner
 
   def get_channel_id(channel)
     unless channel =~ /^((sop:\/\/)?broker.sopcast.com:3912\/)?(\d{4,6})\/?$/
-      puts "Please type correct Channel ID. Run like 'sopcast-runner 12345'"
+      notify_send("Invalid channel URL or ID")
       exit
     end
     # return channel id
@@ -45,14 +47,14 @@ class SopcastRunner
 
   def check_sp_auth
     if `which sp-sc`.empty?
-      puts "Please install command line p2p video streaming client sp-auth"
+      notify_send("Command line p2p video streaming client sp-auth isn't installed")
       exit
     end
   end
 
   def check_player(name)
     if `which #{name}`.empty?
-      puts "Please install #{name} or configure other player"
+      notify_send("Player #{name} isn't installed")
       exit
     end
   end

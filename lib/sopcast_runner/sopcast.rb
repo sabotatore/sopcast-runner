@@ -1,4 +1,5 @@
 class SopcastRunner::Sopcast
+  include Notification
 
   def initialize(channel, port)
     @channel, @port = channel, port
@@ -18,20 +19,21 @@ class SopcastRunner::Sopcast
       pid = m && m[1]
       pid && system("kill #{pid}")
     end
-    puts "\nSopCast successfully stopped"
+    puts "SopCast successfully stopped"
   end
 
   private
 
   def waiting_was_started
     cmd = "netstat -tnlp 2>/dev/null | grep '#{@port}' > /dev/null"
-    timeout = 30
+    timeout = 15
     started = Time.now
     loop do
       break if system cmd
       print '.'
       if (Time.now - started) > timeout
-        puts "\nSopcast cannot connect"
+        puts "\n"
+        notify_send("SopCast channel #{@channel} isn't active now")
         exit
       end
       sleep 3
@@ -39,4 +41,3 @@ class SopcastRunner::Sopcast
   end
 
 end
-

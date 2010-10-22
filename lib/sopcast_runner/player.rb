@@ -5,7 +5,7 @@ class SopcastRunner::Player
   end
 
   def play
-    puts "\nRun #{@name}"
+    puts "Run #{@name}"
     sleep 2
     system "#{@name} http://localhost:#{@port}/tv.asf > /dev/null 2> /dev/null"
   end
