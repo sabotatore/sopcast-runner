@@ -5,6 +5,8 @@ class SopcastRunner
   require "sopcast_runner/sopcast"
   require "sopcast_runner/player"
 
+  DEFAULT_CONFIG = {'player' => 'smplayer', 'port' => 8908}
+
   def initialize(channel)
     check_sp_auth
     channel_id = get_channel_id(channel)
@@ -23,9 +25,13 @@ class SopcastRunner
   private
 
   def load_config
-    YAML.load_file(File.expand_path('../../conf/sopcast_runner/sopcast_runner.conf', __FILE__))
+    # try load config
+    config = YAML.load_file("/etc/sopcast_runner/sopcast_runner.conf")
+    DEFAULT_CONFIG.each {|option, value| config[option] ||= value} if config
+    config || DEFAULT_CONFIG
   rescue Errno::ENOENT
-    YAML.load_file('/etc/sopcast_runner/sopcast_runner.conf')
+    # return default config
+    DEFAULT_CONFIG
   end
 
   def get_channel_id(channel)
