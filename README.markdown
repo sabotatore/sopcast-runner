@@ -22,6 +22,14 @@ or
 
     $ sopcast-runner [ChannelId]
 
+INTEGRATE
+=========
+
+Integrate with Gnome browsers, such as Firefox or Google Chrome
+
+    $ gconftool-2 -s /desktop/gnome/url-handlers/sop/command '/usr/bin/sopcast-runner %s' --type String
+    $ gconftool-2 -s /desktop/gnome/url-handlers/sop/enabled --type Boolean true
+
 CONFIG
 ======
 
