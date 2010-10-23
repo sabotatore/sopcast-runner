@@ -43,7 +43,7 @@ class SopcastRunner
       return "sop://broker.sopcast.com:3912/#{channel}"
     end
     # otherwise check url
-    unless channel =~ /^sop:\/\/(([a-zA-Z0-9\-\.]+\.[a-zA-Z]+)|(([0-9]{1,3}\.){3}[0-9]{1,3})):3912\/\d{3,6}\/?$/
+    unless channel =~ /^sop:\/\/(([a-zA-Z0-9\-\.]+\.[a-zA-Z]+)|(([0-9]{1,3}\.){3}[0-9]{1,3})):\d{4}\/\d{3,6}\/?$/
       notify_send("Invalid channel URL")
       exit
     end
