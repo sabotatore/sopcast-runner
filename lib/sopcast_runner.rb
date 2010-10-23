@@ -11,11 +11,11 @@ class SopcastRunner
 
   def initialize(channel)
     check_sp_auth
-    channel_id = get_channel_id(channel)
+    channel_url = get_channel_url(channel)
     config = load_config
     check_player(config['player'])
     @player = Player.new(config['player'], config['port'])
-    @sopcast = Sopcast.new(channel_id, config['port'])
+    @sopcast = Sopcast.new(channel_url, config['port'])
   end
 
   def run
@@ -36,13 +36,19 @@ class SopcastRunner
     DEFAULT_CONFIG
   end
 
-  def get_channel_id(channel)
-    unless channel =~ /^((sop:\/\/)?broker.sopcast.com:3912\/)?(\d{4,6})\/?$/
-      notify_send("Invalid channel URL or ID")
+  def get_channel_url(channel)
+    # if received channel id
+    if channel =~ /^\d{3,6}$/
+      # return main sopcast url
+      return "sop://broker.sopcast.com:3912/#{channel}"
+    end
+    # otherwise check url
+    unless channel =~ /^sop:\/\/(([a-zA-Z0-9\-\.]+\.[a-zA-Z]+)|(([0-9]{1,3}\.){3}[0-9]{1,3})):3912\/\d{3,6}\/?$/
+      notify_send("Invalid channel URL")
       exit
     end
-    # return channel id
-    $3
+    # return channel url
+    channel
   end
 
   def check_sp_auth

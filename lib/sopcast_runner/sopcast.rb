@@ -6,8 +6,8 @@ class SopcastRunner::Sopcast
   end
 
   def start
-    notify_send("Connecting to #{@channel} channel")
-    system "sp-sc sop://broker.sopcast.com:3912/#{@channel} 3908 #{@port} > /dev/null &"
+    notify_send("Connecting to #{@channel}")
+    system "sp-sc #{@channel} 3908 #{@port} > /dev/null &"
     waiting_was_started
     puts "\nSopCast successfully launched"
   end
