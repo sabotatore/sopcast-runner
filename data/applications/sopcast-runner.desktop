@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=SopCast Runner
+GenericName=SopCast Runner
+Comment=Command line SopCast streaming video runner
+Icon=/usr/share/sopcast_runner/icon_48x48.png
+TryExec=sopcast-runner
+Exec=sopcast-runner %u
+Terminal=false
+Type=Application
+Categories=AudioVideo
+MimeType=x-scheme-handler/sop
+NoDisplay=true
