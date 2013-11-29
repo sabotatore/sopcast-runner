@@ -1,7 +1,6 @@
 SopCast Runner is ruby command line script for running streaming video in external player
 
 [![Code Climate](https://codeclimate.com/github/sabotatore/sopcast-runner.png)](https://codeclimate.com/github/sabotatore/sopcast-runner)
-
 INSTALL
 =======
 
